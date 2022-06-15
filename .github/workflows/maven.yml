@@ -9,6 +9,13 @@ on:
   pull_request:
     branches: [ develop ]
 
+  workflow_dispatch:
+    inputs:
+      snapshotVersion:
+        description: 'Environment'
+        required: false
+        default: <Develop>
+
 jobs:
   build:
 
