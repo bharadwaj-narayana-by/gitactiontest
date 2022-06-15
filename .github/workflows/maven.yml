@@ -11,10 +11,23 @@ on:
 
   workflow_dispatch:
     inputs:
-      snapshotVersion:
-        description: 'Environment'
-        required: false
-        default: <Develop>
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug 
+      tags:
+        description: 'Test scenario tags'
+        required: false 
+        type: boolean
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true 
 
 jobs:
   build:
