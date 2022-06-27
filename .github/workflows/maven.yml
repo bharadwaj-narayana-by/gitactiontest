@@ -30,3 +30,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Condition Test
+      run: |
+          if [[ "${{ github.event.inputs.environment }}" == "development" ]]; then
+          echo "::set-output name=deviceString::iPhone"
+          fi
