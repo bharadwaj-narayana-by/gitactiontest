@@ -8,13 +8,12 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
-
   workflow_dispatch:
     inputs:
-      snapshotVersion:
-        description: 'Environment'
-        required: false
-        default: <Develop>
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
 
 jobs:
   build:
@@ -31,3 +30,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Condition Test
+      run: |
+          if [[ "${{ github.event.inputs.environment }}" == "Development" ]]; then
+          echo "::set-output name=deviceString::iPhone"
+          fi
